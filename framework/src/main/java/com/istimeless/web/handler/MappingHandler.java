@@ -1,5 +1,6 @@
 package com.istimeless.web.handler;
 
+import com.istimeless.beans.BeanFactory;
 import lombok.AllArgsConstructor;
 
 import javax.servlet.ServletRequest;
@@ -45,7 +46,7 @@ public class MappingHandler {
             parameters[i] = req.getParameter(args[i]);
         }
         
-        Object ctl = controller.newInstance();
+        Object ctl = BeanFactory.getBean(controller);
         Object response = method.invoke(ctl, parameters);
         res.getWriter().println(response.toString());
         return true;

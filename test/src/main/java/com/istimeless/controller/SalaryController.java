@@ -1,5 +1,7 @@
 package com.istimeless.controller;
 
+import com.istimeless.beans.AutoWired;
+import com.istimeless.service.SalaryService;
 import com.istimeless.web.mvc.Controller;
 import com.istimeless.web.mvc.RequestMapping;
 import com.istimeless.web.mvc.RequestParam;
@@ -10,9 +12,12 @@ import com.istimeless.web.mvc.RequestParam;
 @Controller
 @RequestMapping("/salary")
 public class SalaryController {
+    @AutoWired
+    private SalaryService salaryService;
+    
     @RequestMapping("/getSalary.json")
     public Integer getSalary(@RequestParam("name") String name, 
                              @RequestParam("experience") String experience){
-        return 10000;
+        return salaryService.calSalary(Integer.parseInt(experience));
     }
 }

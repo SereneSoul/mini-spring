@@ -1,5 +1,6 @@
 package com.istimeless.starter;
 
+import com.istimeless.beans.BeanFactory;
 import com.istimeless.core.ClassScanner;
 import com.istimeless.web.handler.HandlerManager;
 import com.istimeless.web.server.TomcatServer;
@@ -18,6 +19,8 @@ public class MiniApplication {
             List<Class<?>> classList = ClassScanner.scanClasses(cls.getPackage().getName());
             //处理请求
             HandlerManager.resolveMappingHandler(classList);
+            //初始化Bean
+            BeanFactory.initBean(classList);
             classList.forEach(e -> System.out.println(e.getName()));
         } catch (Exception e) {
             e.printStackTrace();
